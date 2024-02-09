@@ -1,15 +1,7 @@
-import { getMonth } from "./utils/getMonth"
+import { Home } from "./pages/Home";
 
 function App() {
-
-
-  console.table(getMonth())
-
-  return (
-    <div>
-      <p>Calendar</p>
-    </div>
-  )
+	return <Home />;
 }
 
-export default App
+export default App;
