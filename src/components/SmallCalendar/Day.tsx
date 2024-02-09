@@ -21,9 +21,9 @@ function Day({
 	return (
 		<div
 			className={`flex items-center justify-center px-2 aspect-square rounded-full text-xs text-center font-sans font-semibold text-gray-600 cursor-pointer transition-all hover:bg-gray-300 
-        ${getTodayClassStyle()} 
-        ${className}
-        ${active && "bg-blue-100 text-blue-500 hover:bg-blue-300"}
+      ${className}
+      ${active && "bg-blue-100 text-blue-500 hover:bg-blue-300"}
+      ${getTodayClassStyle()} 
       `}
 			{...rest}>
 			{day.format("DD")}

@@ -16,7 +16,7 @@ export function Home() {
 		<>
 			<div className="h-screen flex flex-col">
 				<CalendarHeader />
-				<div className="flex flex-1">
+				<div className="flex flex-1 overflow-x-hidden">
 					<SideBar />
 					<Month month={currentMonth} />
 				</div>
