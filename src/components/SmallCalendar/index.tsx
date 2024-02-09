@@ -55,21 +55,25 @@ function SmallCalendar() {
 			</header>
 			<div className="grid grid-cols-7 grid-rows-6 gap-1 mt-4">
 				<Week week={getMonth(currentMonthIndexSmallCalendar)[0]} />
-				{getMonth(currentMonthIndexSmallCalendar).map((week, idx) => (
+				{getMonth(currentMonthIndexSmallCalendar).map((week) => (
 					<>
 						{week.map((day) => {
-							const isDiffMonth = week.some(
-								() => day.month() !== currentMonthIndexSmallCalendar
-							);
+							// const isDiffMonth = week.some(
+							// 	() =>
+							// 		day.month() !== currentMonthIndexSmallCalendar ||
+							// 		day.year() !== dayjs().year()
+							// );
+
 							const active =
 								activeDay?.format("YYYY-MM-DD") === day.format("YYYY-MM-DD");
 
 							return (
 								<Day
 									onClick={() => handleClickDay(day)}
+									key={day.format("YYYY-MM-DD")}
 									active={active}
 									day={day}
-									className={isDiffMonth ? `text-gray-400` : ""}
+									// className={isDiffMonth ? `text-gray-300` : ""}
 								/>
 							);
 						})}
