@@ -1,6 +1,21 @@
+import dayjs from "dayjs";
 import { Menu } from "lucide-react";
+import { useCalendar } from "../../hooks/useCalendar";
 
 function CalendarHeader() {
+	const { currentMonthIndex, setCurrentMonthIndex, navigateToToday } =
+		useCalendar();
+
+	const labelMonth = dayjs().month(currentMonthIndex).format("MMMM YYYY");
+
+	const handlePreviewMonth = () => {
+		setCurrentMonthIndex(currentMonthIndex - 1);
+	};
+
+	const handleNextMonth = () => {
+		setCurrentMonthIndex(currentMonthIndex + 1);
+	};
+
 	return (
 		<div className="w-full p-3 flex items-center border-b">
 			<div className="flex items-center space-x-10">
@@ -14,22 +29,28 @@ function CalendarHeader() {
 							alt="Agenda logo"
 							className="size-10"
 						/>
-						<p className="font-sans font-normal text-xl">Agenda</p>
+						<p className="font-sans font-normal text-xl">Calendar</p>
 					</div>
 				</div>
 				<div className="flex items-center gap-2">
-					<button className="rounded-md border px-4 py-2 font-sans text-sm font-semibold text-gray-500 hover:bg-[#f1f3f4] transition-all">
-						Hoje
+					<button
+						onClick={navigateToToday}
+						className="rounded-md border px-4 py-2 font-sans text-sm font-semibold text-gray-500 hover:bg-[#f1f3f4] transition-all">
+						Today
 					</button>
 					<div className="flex items-center">
-						<div className="material-icons-outlined cursor-pointer text-gray-600 rounded-full p-1 hover:bg-gray-100">
+						<div
+							onClick={handlePreviewMonth}
+							className="material-icons-outlined cursor-pointer text-gray-600 rounded-full p-1 select-none hover:bg-gray-100">
 							chevron_left
 						</div>
-						<div className="material-icons-outlined cursor-pointer text-gray-600 rounded-full p-1 hover:bg-gray-100">
+						<div
+							onClick={handleNextMonth}
+							className="material-icons-outlined cursor-pointer text-gray-600 rounded-full p-1 select-none hover:bg-gray-100">
 							chevron_right
 						</div>
 					</div>
-					<p className="text-xl">Fevereiro de 2024</p>
+					<p className="text-xl">{labelMonth}</p>
 				</div>
 			</div>
 		</div>
