@@ -1,28 +1,28 @@
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useCalendar } from "../../hooks/useCalendar";
-import { getMonth } from "../../utils/getMonth";
+import { getMonth, getMonthSmallCalendar } from "../../utils/getMonth";
 import Day from "./Day";
 import Week from "./Week";
 
 function SmallCalendar() {
-	const [currentMonthIndexSmallCalendar, setCurrentMonthIndexSmallCalendar] =
-		useState(dayjs().month());
-
 	const [activeDay, setActiveDay] = useState<dayjs.Dayjs | null>(null);
 
-	const { currentMonthIndex, setCurrentMonthIndex } = useCalendar();
+	const {
+		currentMonthIndex,
+		currentSmallMonthIndex,
+		setCurrentMonthIndex,
+		setCurrentSmallMonthIndex,
+	} = useCalendar();
 
-	const labelMonth = dayjs()
-		.month(currentMonthIndexSmallCalendar)
-		.format("MMMM YYYY");
+	const labelMonth = dayjs().month(currentSmallMonthIndex).format("MMMM YYYY");
 
 	const handleNextMonth = () => {
-		setCurrentMonthIndexSmallCalendar(currentMonthIndexSmallCalendar + 1);
+		setCurrentSmallMonthIndex(currentSmallMonthIndex + 1);
 	};
 
 	const handlePreviousMonth = () => {
-		setCurrentMonthIndexSmallCalendar(currentMonthIndexSmallCalendar - 1);
+		setCurrentSmallMonthIndex(currentSmallMonthIndex - 1);
 	};
 
 	const handleClickDay = (day: dayjs.Dayjs) => {
@@ -31,7 +31,7 @@ function SmallCalendar() {
 	};
 
 	useEffect(() => {
-		setCurrentMonthIndexSmallCalendar(currentMonthIndex);
+		setCurrentSmallMonthIndex(currentMonthIndex);
 	}, [currentMonthIndex]);
 
 	return (
@@ -54,16 +54,10 @@ function SmallCalendar() {
 				</div>
 			</header>
 			<div className="grid grid-cols-7 grid-rows-6 gap-1 mt-4">
-				<Week week={getMonth(currentMonthIndexSmallCalendar)[0]} />
-				{getMonth(currentMonthIndexSmallCalendar).map((week) => (
+				<Week week={getMonth(currentSmallMonthIndex)[0]} />
+				{getMonthSmallCalendar(currentSmallMonthIndex).map((week) => (
 					<>
 						{week.map((day) => {
-							// const isDiffMonth = week.some(
-							// 	() =>
-							// 		day.month() !== currentMonthIndexSmallCalendar ||
-							// 		day.year() !== dayjs().year()
-							// );
-
 							const active =
 								activeDay?.format("YYYY-MM-DD") === day.format("YYYY-MM-DD");
 
@@ -73,7 +67,6 @@ function SmallCalendar() {
 									key={day.format("YYYY-MM-DD")}
 									active={active}
 									day={day}
-									// className={isDiffMonth ? `text-gray-300` : ""}
 								/>
 							);
 						})}
