@@ -6,7 +6,7 @@ import {
 	useMemo,
 	useState,
 } from "react";
-import { getMonth } from "../../utils/getMonth";
+import { getMonth, getMonthSmallCalendar } from "../../utils/getMonth";
 
 export interface SmallCalendarHeaderProps {
 	nextMonth: () => void;
@@ -30,13 +30,13 @@ const SmallCalendarHeader: React.ForwardRefRenderFunction<
 
 	const nextMonth = () => {
 		setCurrentMonthIndexSmallCalendar(currentMonthIndexSmallCalendar + 1);
-		setCurrentMonth(getMonth(currentMonthIndexSmallCalendar));
+		setCurrentMonth(getMonthSmallCalendar(currentMonthIndexSmallCalendar));
 	};
 
 	const previousMonth = () => {
 		setCurrentMonthIndexSmallCalendar(currentMonthIndexSmallCalendar - 1);
 
-		setCurrentMonth(getMonth(currentMonthIndexSmallCalendar));
+		setCurrentMonth(getMonthSmallCalendar(currentMonthIndexSmallCalendar));
 	};
 
 	const getCurrentMonth = useCallback(() => {
