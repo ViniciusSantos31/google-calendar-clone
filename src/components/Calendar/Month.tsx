@@ -4,6 +4,7 @@ import Day from "./Day";
 
 import "animate.css";
 import { useCalendar } from "../../hooks/useCalendar";
+import { useSidebar } from "../../hooks/useSidebar";
 
 type Props = {
 	month: dayjs.Dayjs[][];
@@ -11,6 +12,7 @@ type Props = {
 
 function Month({ month }: Props) {
 	const { currentMonthIndex } = useCalendar();
+	const { visible } = useSidebar();
 	const [preventMonthIndex, setPreventMonthIndex] = useState(currentMonthIndex);
 
 	useEffect(() => {
@@ -41,7 +43,9 @@ function Month({ month }: Props) {
 	return (
 		<div
 			id="calendar_month"
-			className={`flex-1 border-collapse grid grid-cols-7 grid-rows-[${month.length}] -z-0`}>
+			className={`flex-1 border-collapse grid grid-cols-7 grid-rows-[${
+				month.length
+			}] -z-0 transition-all ${!visible && "border-l"}`}>
 			{month.map((week, idxWeek) => (
 				<Fragment key={idxWeek}>
 					{week.map((day, idxDay) => (

@@ -1,11 +1,13 @@
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { HTMLAttributes, useEffect, useState } from "react";
 import { useCalendar } from "../../hooks/useCalendar";
 import { getMonth, getMonthSmallCalendar } from "../../utils/getMonth";
 import Day from "./Day";
 import Week from "./Week";
 
-function SmallCalendar() {
+type SmallCalendarProps = HTMLAttributes<HTMLDivElement>;
+
+function SmallCalendar({ className, ...rest }: SmallCalendarProps) {
 	const [activeDay, setActiveDay] = useState<dayjs.Dayjs | null>(null);
 
 	const {
@@ -35,7 +37,7 @@ function SmallCalendar() {
 	}, [currentMonthIndex]);
 
 	return (
-		<div className="mt-6">
+		<div className={`mt-6 ${className}`} {...rest}>
 			<header className="flex w-full items-center justify-between space-x-2">
 				<h2 className="text-sm font-semibold text-gray-800 font-sans ml-2">
 					{labelMonth}
