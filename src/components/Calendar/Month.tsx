@@ -11,21 +11,27 @@ type Props = {
 
 function Month({ month }: Props) {
 	const { currentMonthIndex } = useCalendar();
-	const [previousMonthIndex, setPreviousMonthIndex] =
-		useState(currentMonthIndex);
+	const [preventMonthIndex, setPreventMonthIndex] = useState(currentMonthIndex);
 
 	useEffect(() => {
 		const month = document.getElementById("calendar_month");
 
+		const animationClass =
+			currentMonthIndex > preventMonthIndex
+				? "animate-slide-left"
+				: "animate-slide-right";
+
 		if (month) {
-			month.classList.add("animate__animated", "animate-slide-left");
+			month.classList.add("animate__animated", animationClass);
 		}
 
 		const animationInterval = setInterval(() => {
 			if (month) {
-				month.classList.remove("animate__animated", "animate-slide-left");
+				month.classList.remove("animate__animated", animationClass);
 			}
-		}, 100);
+		}, 200);
+
+		setPreventMonthIndex(currentMonthIndex);
 
 		return () => {
 			clearInterval(animationInterval);

@@ -11,12 +11,12 @@ export default {
 			},
 			keyframes: {
 				"slide-left": {
-					"0%": { transform: "translateX(50%)" },
-					"100%": { transform: "translateX(0)" },
+					"0%": { transform: "translateX(50%)", opacity: 0 },
+					"100%": { transform: "translateX(0)", opacity: 1 },
 				},
 				"slide-right": {
-					"0%": { transform: "translateX(-50%)" },
-					"100%": { transform: "translateX(0)" },
+					"0%": { transform: "translateX(-50%)", opacity: 0 },
+					"100%": { transform: "translateX(0)", opacity: 1 },
 				},
 			},
 			animation: {
