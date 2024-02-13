@@ -1,10 +1,13 @@
 import dayjs from "dayjs";
 import { Menu } from "lucide-react";
 import { useCalendar } from "../../hooks/useCalendar";
+import { useSidebar } from "../../hooks/useSidebar";
 
 function CalendarHeader() {
 	const { currentMonthIndex, setCurrentMonthIndex, navigateToToday } =
 		useCalendar();
+
+	const { toggleVisibility } = useSidebar();
 
 	const labelMonth = dayjs().month(currentMonthIndex).format("MMMM YYYY");
 
@@ -20,9 +23,11 @@ function CalendarHeader() {
 		<div className="w-full p-3 flex items-center border-b">
 			<div className="flex items-center space-x-10">
 				<div className="flex items-center">
-					<div className="p-2 size-auto cursor-pointer rounded-full mr-4 hover:bg-gray-200">
+					<button
+						onClick={toggleVisibility}
+						className="p-2 size-auto cursor-pointer rounded-full mr-4 hover:bg-gray-200">
 						<Menu />
-					</div>
+					</button>
 					<div className="flex space-x-2 items-center">
 						<img
 							src={`https://ssl.gstatic.com/calendar/images/dynamiclogo_2020q4/calendar_${dayjs().date()}_2x.png`}
@@ -35,7 +40,7 @@ function CalendarHeader() {
 				<div className="flex items-center gap-2">
 					<button
 						onClick={navigateToToday}
-						className="rounded-md border px-4 py-2 font-sans text-sm font-semibold text-gray-500 hover:bg-[#f1f3f4] transition-all">
+						className="border px-4 py-2 font-sans text-sm font-semibold text-gray-500 hover:bg-[#f1f3f4] transition-all rounded">
 						Today
 					</button>
 					<div className="flex items-center">
