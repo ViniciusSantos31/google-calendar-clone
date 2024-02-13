@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { HTMLAttributes, useEffect, useState } from "react";
+import { Fragment, HTMLAttributes, useEffect, useState } from "react";
 import { useCalendar } from "../../hooks/useCalendar";
 import { getMonth, getMonthSmallCalendar } from "../../utils/getMonth";
 import Day from "./Day";
@@ -43,13 +43,19 @@ function SmallCalendar({ className, ...rest }: SmallCalendarProps) {
 					{labelMonth}
 				</h2>
 				<div className="flex gap-2">
-					<button onClick={handlePreviousMonth}>
-						<div className="material-icons-outlined cursor-pointer text-gray-600 rounded-full p-1 select-none hover:bg-gray-100">
+					<button
+						onClick={handlePreviousMonth}
+						disabled={currentSmallMonthIndex === 0}
+						className="group group-hover:text-gray-600 cursor-pointer text-gray-600 rounded-full select-none hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50">
+						<div className=" group-disabled:cursor-default material-icons-outlined cursor-pointer text-gray-600 rounded-full p-1 select-none hover:bg-gray-100">
 							chevron_left
 						</div>
 					</button>
-					<button onClick={handleNextMonth}>
-						<div className="material-icons-outlined cursor-pointer text-gray-600 rounded-full p-1 select-none hover:bg-gray-100">
+					<button
+						onClick={handleNextMonth}
+						disabled={currentSmallMonthIndex === 11}
+						className="group group-hover:text-gray-600 cursor-pointer text-gray-600 rounded-full select-none hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50">
+						<div className="group-disabled:cursor-default material-icons-outlined cursor-pointer text-gray-600 rounded-full p-1 select-none hover:bg-gray-100">
 							chevron_right
 						</div>
 					</button>
@@ -58,10 +64,12 @@ function SmallCalendar({ className, ...rest }: SmallCalendarProps) {
 			<div className="grid grid-cols-7 grid-rows-6 gap-1 mt-4">
 				<Week week={getMonth(currentSmallMonthIndex)[0]} />
 				{getMonthSmallCalendar(currentSmallMonthIndex).map((week) => (
-					<>
+					<Fragment>
 						{week.map((day) => {
 							const active =
 								activeDay?.format("YYYY-MM-DD") === day.format("YYYY-MM-DD");
+
+							const isNotThisMonth = day.month() !== currentSmallMonthIndex;
 
 							return (
 								<Day
@@ -69,10 +77,15 @@ function SmallCalendar({ className, ...rest }: SmallCalendarProps) {
 									key={day.format("YYYY-MM-DD")}
 									active={active}
 									day={day}
+									className={
+										isNotThisMonth
+											? "text-gray-300 font-normal hover:bg-blue-300 hover:text-white"
+											: ""
+									}
 								/>
 							);
 						})}
-					</>
+					</Fragment>
 				))}
 			</div>
 		</div>

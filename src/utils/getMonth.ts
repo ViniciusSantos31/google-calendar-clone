@@ -1,10 +1,6 @@
 import dayjs from "dayjs";
 
-export const getMonth = (
-	month = dayjs().month(),
-	year = dayjs().year(),
-	small = false
-) => {
+export const getMonth = (month = dayjs().month(), year = dayjs().year()) => {
 	const firstDayOfMonth = dayjs(new Date(year, month, 1)).day();
 	let currentMonthCount = 0 - firstDayOfMonth;
 
@@ -19,7 +15,7 @@ export const getMonth = (
 		(day) => day.month() !== month
 	);
 
-	if (doesNotHaveFiveWeeks && !small) return daysMatrix.slice(0, 5);
+	if (doesNotHaveFiveWeeks) return daysMatrix.slice(0, 5);
 
 	return daysMatrix;
 };
