@@ -23,7 +23,7 @@ export function CreateEventButton({
 			<img
 				src={plusIcon}
 				alt="create_icon"
-				className={`mr-3 size-8 ${hiddenLabel && "min-w-8 mr-0"}`}
+				className={`size-8 ${hiddenLabel ? "min-w-8 mr-0" : "mr-3"}`}
 			/>
 			<p
 				hidden={hiddenLabel}

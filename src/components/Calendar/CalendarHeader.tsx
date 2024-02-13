@@ -40,7 +40,7 @@ function CalendarHeader() {
 				<div className="flex items-center gap-2">
 					<button
 						onClick={navigateToToday}
-						className="rounded-md border px-4 py-2 font-sans text-sm font-semibold text-gray-500 hover:bg-[#f1f3f4] transition-all">
+						className="border px-4 py-2 font-sans text-sm font-semibold text-gray-500 hover:bg-[#f1f3f4] transition-all rounded">
 						Today
 					</button>
 					<div className="flex items-center">
