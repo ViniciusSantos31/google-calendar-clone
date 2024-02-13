@@ -25,7 +25,7 @@ function CalendarHeader() {
 					</div>
 					<div className="flex space-x-2 items-center">
 						<img
-							src="https://ssl.gstatic.com/calendar/images/dynamiclogo_2020q4/calendar_9_2x.png"
+							src={`https://ssl.gstatic.com/calendar/images/dynamiclogo_2020q4/calendar_${dayjs().date()}_2x.png`}
 							alt="Agenda logo"
 							className="size-10"
 						/>
