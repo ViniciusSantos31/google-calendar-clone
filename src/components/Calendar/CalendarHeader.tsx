@@ -44,16 +44,18 @@ function CalendarHeader() {
 						Today
 					</button>
 					<div className="flex items-center">
-						<div
+						<button
 							onClick={handlePreviewMonth}
+							disabled={currentMonthIndex === 0}
 							className="material-icons-outlined cursor-pointer text-gray-600 rounded-full p-1 select-none hover:bg-gray-100">
 							chevron_left
-						</div>
-						<div
+						</button>
+						<button
 							onClick={handleNextMonth}
+							disabled={currentMonthIndex === 11}
 							className="material-icons-outlined cursor-pointer text-gray-600 rounded-full p-1 select-none hover:bg-gray-100">
 							chevron_right
-						</div>
+						</button>
 					</div>
 					<p className="text-xl">{labelMonth}</p>
 				</div>

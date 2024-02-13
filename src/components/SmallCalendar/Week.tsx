@@ -6,7 +6,9 @@ type WeekProps = {
 
 function Week({ week }: WeekProps) {
 	return week.map((day) => (
-		<div className="text-center font-sans cursor-default font-semibold text-gray-500 text-xs">
+		<div
+			key={day.valueOf()}
+			className="text-center font-sans cursor-default font-semibold text-gray-500 text-xs">
 			{day.format("dd")[0]}
 		</div>
 	));
