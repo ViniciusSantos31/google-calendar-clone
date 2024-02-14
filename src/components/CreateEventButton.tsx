@@ -3,8 +3,6 @@ import plusIcon from "../assets/plus.svg";
 
 type DivAttributes = ButtonHTMLAttributes<HTMLButtonElement>;
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
-
 interface CreateEventButtonProps extends DivAttributes {
 	hiddenLabel?: boolean;
 }
