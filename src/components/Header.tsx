@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 import { Menu } from "lucide-react";
-import { useCalendar } from "../../hooks/useCalendar";
-import { useSidebar } from "../../hooks/useSidebar";
+import { useCalendar } from "../hooks/useCalendar";
+import { useSidebar } from "../hooks/useSidebar";
 
-function CalendarHeader() {
+function Header() {
 	const { currentMonthIndex, setCurrentMonthIndex, navigateToToday } =
 		useCalendar();
 
@@ -64,4 +64,4 @@ function CalendarHeader() {
 	);
 }
 
-export default CalendarHeader;
+export default Header;
