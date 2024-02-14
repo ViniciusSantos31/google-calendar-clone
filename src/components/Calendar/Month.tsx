@@ -1,19 +1,21 @@
-import dayjs from "dayjs";
 import { Fragment, useEffect, useState } from "react";
 import Day from "./Day";
 
 import "animate.css";
 import { useCalendar } from "../../hooks/useCalendar";
 import { useSidebar } from "../../hooks/useSidebar";
+import { getMonth } from "../../utils/getMonth";
 
-type Props = {
-	month: dayjs.Dayjs[][];
-};
-
-function Month({ month }: Props) {
+function Month() {
 	const { currentMonthIndex } = useCalendar();
 	const { visible } = useSidebar();
+
 	const [preventMonthIndex, setPreventMonthIndex] = useState(currentMonthIndex);
+	const [currentMonth, setCurrentMonth] = useState(getMonth());
+
+	useEffect(() => {
+		setCurrentMonth(getMonth(currentMonthIndex));
+	}, [currentMonthIndex]);
 
 	useEffect(() => {
 		const month = document.getElementById("calendar_month");
@@ -44,9 +46,9 @@ function Month({ month }: Props) {
 		<div
 			id="calendar_month"
 			className={`flex-1 border-collapse grid grid-cols-7 grid-rows-[${
-				month.length
-			}] -z-0 transition-all ${!visible && "border-l"}`}>
-			{month.map((week, idxWeek) => (
+				currentMonth.length
+			}] z-0 transition-all ${!visible && "border-l"}`}>
+			{currentMonth.map((week, idxWeek) => (
 				<Fragment key={idxWeek}>
 					{week.map((day, idxDay) => (
 						<Day day={day} isFirstWeek={idxWeek === 0} key={idxDay} />
