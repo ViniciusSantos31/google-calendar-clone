@@ -79,7 +79,7 @@ function SmallCalendar({ className, ...rest }: SmallCalendarProps) {
 									day={day}
 									className={
 										isNotThisMonth
-											? "text-gray-300 font-normal hover:bg-blue-300 hover:text-white"
+											? "text-gray-400 font-normal hover:bg-blue-300 hover:text-white"
 											: ""
 									}
 								/>

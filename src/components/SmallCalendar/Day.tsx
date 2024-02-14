@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { HTMLAttributes, useCallback } from "react";
+import { cn } from "../../lib/utils";
 
 type DayProps = {
 	day: dayjs.Dayjs;
@@ -20,11 +21,11 @@ function Day({
 
 	return (
 		<div
-			className={`flex items-center justify-center px-2 aspect-square rounded-full text-xs text-center font-sans font-semibold text-gray-600 cursor-pointer transition-all hover:bg-blue-200 
+			className={cn(`flex items-center justify-center px-2 aspect-square rounded-full text-xs text-center font-sans font-semibold text-gray-600 cursor-pointer transition-all hover:bg-blue-200 
       ${className}
       ${active && "bg-blue-100 text-blue-500 hover:bg-blue-300"}
       ${getTodayClassStyle()} 
-      `}
+      `)}
 			{...rest}>
 			{day.format("DD")}
 		</div>
