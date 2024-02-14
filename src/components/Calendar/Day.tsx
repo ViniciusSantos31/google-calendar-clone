@@ -1,7 +1,7 @@
 import dayjs, { Dayjs } from "dayjs";
 import { useCallback, useEffect, useState } from "react";
 import { useCalendar } from "../../hooks/useCalendar";
-import { eventService } from "../../services/event";
+import { Event, eventService } from "../../services/event";
 import CalendarEvent from "../Event";
 
 type Props = {
@@ -18,9 +18,7 @@ function Day({ day, isFirstWeek }: Props) {
 		return isToday ? "bg-blue-600 text-white font-bold hover:bg-blue-500" : "";
 	};
 
-	const [events, setEvents] = useState<
-		import("/home/vinicius/Documents/Dev/calendar/src/services/event").Event[]
-	>([]);
+	const [events, setEvents] = useState<Event[]>([]);
 
 	const getEventsTheDay = useCallback(async () => {
 		await eventService
@@ -30,7 +28,7 @@ function Day({ day, isFirstWeek }: Props) {
 					res.filter((event) => dayjs(event.date).date() === day.date())
 				)
 			);
-	}, [currentMonthIndex, day]);
+	}, [currentMonthIndex]);
 
 	useEffect(() => {
 		getEventsTheDay();
@@ -51,7 +49,7 @@ function Day({ day, isFirstWeek }: Props) {
 			</header>
 			<body className="flex flex-col">
 				{events.map((event) => (
-					<CalendarEvent key={event.id} event={{} as Event} />
+					<CalendarEvent key={event.id} event={event} />
 				))}
 			</body>
 		</div>
