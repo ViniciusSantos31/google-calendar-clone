@@ -1,0 +1,39 @@
+{
+	"events": [
+		{
+			"id": 1,
+			"name": "Event 1",
+			"date": "2024-04-01T11:00:00",
+			"location": "Location 1",
+			"description": "Description 1"
+		},
+		{
+			"id": 2,
+			"name": "Event 2",
+			"date": "2024-01-02T11:00:00",
+			"location": "Location 2",
+			"description": "Description 2"
+		},
+		{
+			"id": 3,
+			"name": "Event 3",
+			"date": "2024-03-03T12:00:00",
+			"location": "Location 3",
+			"description": "Description 3"
+		},
+		{
+			"id": 4,
+			"name": "Event 4",
+			"date": "2024-02-04T09:00:00",
+			"location": "Location 4",
+			"description": "Description 4"
+		},
+		{
+			"id": 5,
+			"name": "Event 5",
+			"date": "2024-02-05T15:00:00",
+			"location": "Location 5",
+			"description": "Description 5"
+		}
+	]
+}

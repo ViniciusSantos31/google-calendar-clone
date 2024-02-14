@@ -1,4 +1,8 @@
 import dayjs, { Dayjs } from "dayjs";
+import { useCallback, useEffect, useState } from "react";
+import { useCalendar } from "../../hooks/useCalendar";
+import { eventService } from "../../services/event";
+import CalendarEvent from "../Event";
 
 type Props = {
 	day: Dayjs;
@@ -6,14 +10,34 @@ type Props = {
 };
 
 function Day({ day, isFirstWeek }: Props) {
+	const { currentMonthIndex } = useCalendar();
+
+	const isToday =
+		day.format("YYYY-MM-DD") === dayjs(new Date()).format("YYYY-MM-DD");
 	const getCurrentDayClass = () => {
-		return day.format("YYYY-MM-DD") === dayjs(new Date()).format("YYYY-MM-DD")
-			? "bg-blue-600 text-white font-bold hover:bg-blue-500"
-			: "";
+		return isToday ? "bg-blue-600 text-white font-bold hover:bg-blue-500" : "";
 	};
 
+	const [events, setEvents] = useState<
+		import("/home/vinicius/Documents/Dev/calendar/src/services/event").Event[]
+	>([]);
+
+	const getEventsTheDay = useCallback(async () => {
+		await eventService
+			.getEvents(day.month())
+			.then((res) =>
+				setEvents(
+					res.filter((event) => dayjs(event.date).date() === day.date())
+				)
+			);
+	}, [currentMonthIndex, day]);
+
+	useEffect(() => {
+		getEventsTheDay();
+	}, [getEventsTheDay]);
+
 	return (
-		<div className="border-b border-r border-gray-200 flex flex-col">
+		<div className="border-b border-r border-gray-200 flex flex-col pr-1">
 			<header className="flex flex-col items-center">
 				{isFirstWeek && (
 					<p className="text-xs mt-1 text-gray-500 uppercase">
@@ -25,6 +49,11 @@ function Day({ day, isFirstWeek }: Props) {
 					{day.format("DD")}
 				</p>
 			</header>
+			<body className="flex flex-col">
+				{events.map((event) => (
+					<CalendarEvent key={event.id} event={{} as Event} />
+				))}
+			</body>
 		</div>
 	);
 }
